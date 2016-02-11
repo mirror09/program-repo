@@ -1,16 +1,17 @@
 #include <stdio.h>
- 
+/*Decimal to tarnary*/
 void main()
 {
     long num, decimal_num, remainder, base = 1, binary = 0, no_of_1s = 0,remainders = 0,binary1s = 0;
  
-    printf("Enter a decimal integer \n");
+    printf("Enter a decimal integer :\n");
     scanf("%ld", &num);
     decimal_num = num;
     while (num > 0)
     {
         remainder = num % 3;
         /*  To count no.of 1s */
+        /* This Data */
         if (remainder == 1)
         {
             no_of_1s++;
