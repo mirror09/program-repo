@@ -1,5 +1,7 @@
 /*
- * stack.c
+ * Program Name	: stack.c
+ * Aurthor		: Victor Banerjee
+ * 
  * Implementation of Stack Using Arrays
  * A stack is generally implemented with two basic operations – push and pop.
  * Push means to insert an item on to stack. tos is a pointer which denotes the position of top most item in the stack. 
