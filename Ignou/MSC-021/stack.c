@@ -49,7 +49,7 @@ void main()
 void menu()
 	{
 		printf("\n\nEnter the following options:\n");
-		printf("\n1.PUSH\n 2.POP\n 3.SHOW ELEMENTS\n 4. EXIT\n\n ");
+		printf("\n 1.PUSH\n 2.POP\n 3.SHOW ELEMENTS\n 4. EXIT\n\n Your Choice : ");
 		scanf("%d",&choice);
 		
 		if (choice==1)
@@ -76,6 +76,7 @@ void push()
 	{
 		printf("Enter the element to be pushed to stack : ");
 		scanf("%d",&element);
+		printf("\nElement Added !!");
 		stack[top]=element;
 		++top;
 	}
@@ -90,7 +91,7 @@ void pop()
 	{
 		--top;
 		element==stack[top];
-		printf("Popped Element: %d\n",element);
+		printf("\nPopped Element: %d\n",element);
 	}
 	else
 		printf("Stack is Empty%d\n",element);
@@ -102,9 +103,10 @@ void showelements()
 	if (top <= 0)
 		printf("Stack is empty\n");
 	else
+		printf("Elements in the Stack:");
 		for (int i = 0; i < top; i++)
 		{
-			printf("%d\n", stack[i]);
+			printf("\n%d", stack[i]);
 		}
 		
 	}
