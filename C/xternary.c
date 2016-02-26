@@ -2,12 +2,15 @@
 #include <stdlib.h>
 #include <math.h>
 int add(void);
-int dec2ter(void);
-int complement3s();
+int dec2ter(int decimalNumber);
+int complement3s(int decimalNumber);
 /*Main Function*/
 int main()
 {	int choice;
-	
+	int decimalNumber;
+	printf("Enter a Decimal Number :");
+	scanf("%d",&decimalNumber);
+		
 	printf("1. Decimal to Ternary Coversion\n");
 	printf("2. Calculate 3's Complement Decimal Numeber\n");
 	printf("3. Addition of Two ternary Number\n" );
@@ -18,10 +21,10 @@ int main()
 	switch (choice)
 	{
 		case 1:
-			dec2ter();
+			dec2ter(decimalNumber);
 			break;
 		case 2:
-			complement3s();
+			complement3s(decimalNumber);
 			break;
 		case 3:
 			add();
@@ -65,15 +68,12 @@ int add( void)
    return 0;
 	}
 /*Decimal to Ternary*/
-int dec2ter(void)
+int dec2ter(int decimalNumber)
 {
-  long int decimalNumber,remainder,quotient;
+  int remainder=3,quotient;
   int octalNumber[10],i=1,j;
-
-  printf("Enter any decimal number: ");
-  scanf("%ld",&decimalNumber);
-
   quotient = abs(decimalNumber);
+  
   for (j = 8; j >0 ; j--)
   {
 	  if(decimalNumber >0)
@@ -81,36 +81,42 @@ int dec2ter(void)
 	  else
 		octalNumber[j]=1;
   }
-  
-
-  while(quotient!=0){
-      octalNumber[i++]= quotient % 2;
-      quotient = quotient / 2;
+  if(decimalNumber > 0)
+	{
+	  while(quotient!=0){
+      octalNumber[i++]= quotient % 3;
+      quotient = quotient / 3;
   }
 
-  printf("Equivalent Ternary value of decimal number %ld:",decimalNumber);
-  for(j = 8 ;j> 0;j--)
-      printf("%d",octalNumber[j]);
-  printf("\n");
-  return 0;  
+		}
+	else
+	{
+	  while(quotient!=0){
+		octalNumber[i++]=remainder - (quotient % 3);
+		remainder=2;
+		quotient = quotient / 3;
+	    }
+		}
+	printf("Equivalent Ternary value of decimal number %d:",decimalNumber);
+	for(j = 8 ;j> 0;j--)
+		printf("%d",octalNumber[j]);
+	printf("\n");
+      return 0;
 }
 /*Calculate 3's Complement Decimal Numeber*/
-int complement3s(void)
+int complement3s(int decimalNumber)
 {
-  long int decimalNumber,remainder=3,quotient,logs;
+  int remainder=3,quotient,logs;
   int octalNumber[100],i=1,j,k=1;
 
-  printf("Enter any decimal number: ");
-  scanf("%ld",&decimalNumber);
-
-  quotient = decimalNumber;
+  quotient = abs(decimalNumber);
 
   while(quotient!=0){
       octalNumber[i++]=remainder - (quotient % 3);
       remainder=2;
       quotient = quotient / 3;
   }
-  printf("Equivalent 3's Ternary value of decimal number %ld: ",decimalNumber);
+  printf("Equivalent 3's Ternary value of decimal number %d: ",decimalNumber);
   for(j = i -1 ;j> 0;j--){
       printf("%d",octalNumber[j]);
   }

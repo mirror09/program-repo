@@ -35,3 +35,4 @@ def PatternCount(Pattern, Text):
 Text="CGGAGGACTCTAGGTAACGCTTATCAGGTCCATAGGACATTCA"
 k=3
 print(FrequentWords(Text, k))
+print(CountDict(Text, k))
