@@ -2,12 +2,28 @@
 #  File Name	:GreedyMotifSearch.py
 #  DEVELOPER	:Victor Frankenstein (Banerjee)
 #  Email		:<recervictory@gmail.com>
-#  Date			:2016-02-21
+#  Date			:2016-02-26
 #  
 #  
 #  Copyright 2016 Victor Frankenstein (Banerjee) <recervictory@gmail.com>
 #  -----------------------------------------------------------------
+
 # Copy your Score(Motifs), Count(Motifs), Profile(Motifs), and Consensus(Motifs) functions here.
+def Profile(Motifs):
+    t = len(Motifs)
+    k = len(Motifs[0])
+    profile = {}
+    # insert your code here
+    for symbol in "ACGT": #COUNT FOR EACH SYMBOL A C G T
+        profile[symbol]=[]
+        for i in range(k):
+            profile[symbol].append(0) 
+    for i in range(t):
+        for j in range(k):
+            symbol = Motifs[i][j]
+            profile[symbol][j] += 1/t
+    return profile
+
 def Consensus(Motifs):
 	# insert your code here
 	k = len(Motifs[0])
@@ -75,3 +91,16 @@ def Pr(Text, Profile):
 # Output: GreedyMotifSearch(Dna, k, t)
 def GreedyMotifSearch(Dna, k, t):
     # type your GreedyMotifSearch code here.
+    BestMotifs = []
+    for i in range(0, t):
+        BestMotifs.append(Dna[i][0:k])
+    n = len(Dna[0])
+    for i in range(n-k+1):
+        Motifs = []
+        Motifs.append(Dna[0][i:i+k])
+        for j in range(1, t):
+            P = Profile(Motifs[0:j])
+            Motifs.append(ProfileMostProbablePattern(Dna[j], k, P))
+            if Score(Motifs) < Score(BestMotifs):
+                BestMotifs = Motifs
+    return BestMotifs
