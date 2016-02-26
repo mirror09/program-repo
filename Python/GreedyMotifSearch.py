@@ -10,19 +10,19 @@
 
 # Copy your Score(Motifs), Count(Motifs), Profile(Motifs), and Consensus(Motifs) functions here.
 def Profile(Motifs):
-    t = len(Motifs)
-    k = len(Motifs[0])
-    profile = {}
+	t = len(Motifs)
+	k = len(Motifs[0])
+	profile = {}
     # insert your code here
-    for symbol in "ACGT": #COUNT FOR EACH SYMBOL A C G T
-        profile[symbol]=[]
-        for i in range(k):
-            profile[symbol].append(0) 
-    for i in range(t):
-        for j in range(k):
-            symbol = Motifs[i][j]
-            profile[symbol][j] += 1/t
-    return profile
+	for symbol in "ACGT": #COUNT FOR EACH SYMBOL A C G T
+		profile[symbol]=[]
+		for i in range(k):
+			profile[symbol].append(0) 
+	for i in range(t):
+		for j in range(k):
+			symbol = Motifs[i][j]
+			profile[symbol][j] += 1/t
+	return profile
 
 def Consensus(Motifs):
 	# insert your code here
@@ -55,23 +55,23 @@ def Count(Motifs):
 	return count
 
 def Score(Motifs):
-    # Insert code here
-    consensus=Consensus(Motifs)
-    count= Count(Motifs)
-    k =len(consensus)
-    j= len(count)
-    t=len(Motifs)
-    mscore =0
-    score =0
-    for i in range(k):
-        mscore= t - count[consensus[i]][i]
-        score+=mscore
-    return score
+	# Insert code here
+	consensus=Consensus(Motifs)
+	count= Count(Motifs)
+	k =len(consensus)
+	j= len(count)
+	t=len(Motifs)
+	mscore =0
+	score =-1
+	for i in range(k):
+		mscore= t - count[consensus[i]][i]
+		score+=mscore
+	return score
 
 # Then copy your ProfileMostProbablePattern(Text, k, Profile) and Pr(Text, Profile) functions here.
 def ProfileMostProbablePattern(Text, k, Profile):
     # insert your code here. Make sure to use Pr(Text, Profile) as a subroutine!
-	matchmax=0
+	matchmax=-1
 	ProbablePattern=""
 	for i in range(len(Text)-k+1):
 		Pattern = Text[i:i+k]
@@ -90,17 +90,22 @@ def Pr(Text, Profile):
 # Input:  A list of kmers Dna, and integers k and t (where t is the number of kmers in Dna)
 # Output: GreedyMotifSearch(Dna, k, t)
 def GreedyMotifSearch(Dna, k, t):
-    # type your GreedyMotifSearch code here.
-    BestMotifs = []
-    for i in range(0, t):
-        BestMotifs.append(Dna[i][0:k])
-    n = len(Dna[0])
-    for i in range(n-k+1):
-        Motifs = []
-        Motifs.append(Dna[0][i:i+k])
-        for j in range(1, t):
-            P = Profile(Motifs[0:j])
-            Motifs.append(ProfileMostProbablePattern(Dna[j], k, P))
-            if Score(Motifs) < Score(BestMotifs):
-                BestMotifs = Motifs
-    return BestMotifs
+	# type your GreedyMotifSearch code here.
+	BestMotifs = []
+	for i in range(0, t):
+		BestMotifs.append(Dna[i][0:k])
+	n = len(Dna[0])
+	for i in range(n-k+1):
+		Motifs = []
+		Motifs.append(Dna[0][i:i+k])
+		for j in range(1, t):
+			P = Profile(Motifs[0:j])
+			Motifs.append(ProfileMostProbablePattern(Dna[j], k, P))
+			if Score(Motifs) < Score(BestMotifs):
+				BestMotifs = Motifs
+	return BestMotifs
+
+with open('stepic.txt') as input_data:
+	k, t = map(int, input_data.readline().split())
+	dna_list = [line.strip() for line in input_data]
+	print('\n'.join(GreedyMotifSearch(dna_list, k, t)))
