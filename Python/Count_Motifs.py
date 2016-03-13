@@ -27,3 +27,4 @@ def Count(Motifs):
 			symbol = Motifs[i][j]
 			count[symbol][j] += 1		
     return count
+

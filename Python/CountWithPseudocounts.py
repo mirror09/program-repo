@@ -22,7 +22,7 @@ def CountWithPseudocounts(Motifs):
 		for j in range(k):
 			symbol = Motifs[i][j]
 			count[symbol][j] += 1
-	return count
+	return countC	
 
 def ProfileWithPseudocounts(Motifs):
 	t = len(Motifs)

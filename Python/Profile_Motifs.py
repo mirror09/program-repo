@@ -16,3 +16,7 @@ def Profile(Motifs):
             symbol = Motifs[i][j]
             profile[symbol][j] += 1/t
     return profile
+
+with open('CountWithPseudocounts.txt') as input_data:
+	dna_list = [line.strip() for line in input_data]
+	print(Profile(dna_list))

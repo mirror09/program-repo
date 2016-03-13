@@ -71,7 +71,7 @@ def Score(Motifs):
 # Then copy your ProfileMostProbablePattern(Text, k, Profile) and Pr(Text, Profile) functions here.
 def ProfileMostProbablePattern(Text, k, Profile):
     # insert your code here. Make sure to use Pr(Text, Profile) as a subroutine!
-	matchmax=-1
+	matchmax=0
 	ProbablePattern=""
 	for i in range(len(Text)-k+1):
 		Pattern = Text[i:i+k]
@@ -101,8 +101,8 @@ def GreedyMotifSearch(Dna, k, t):
 		for j in range(1, t):
 			P = Profile(Motifs[0:j])
 			Motifs.append(ProfileMostProbablePattern(Dna[j], k, P))
-			if Score(Motifs) < Score(BestMotifs):
-				BestMotifs = Motifs
+		if Score(Motifs) < Score(BestMotifs):
+			BestMotifs = Motifs
 	return BestMotifs
 
 with open('stepic.txt') as input_data:
