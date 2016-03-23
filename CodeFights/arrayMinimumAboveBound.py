@@ -14,9 +14,8 @@ def arrayMinimumAboveBound(inputArray, bound):
 	for i in range(len(inputArray)):
 		if inputArray[i] > bound and (best == -1 or inputArray[i] < best):
 			best = inputArray[i]
-			print best
 	return best
 
 
 print arrayMinimumAboveBound([1, 3, 5, 4, 2, 6],3)
-print arrayMinimumAboveBound([1, 3, 5, 4, 2, 6],3)
+print arrayMinimumAboveBound([1, 4, 10, 5, 2],1)
